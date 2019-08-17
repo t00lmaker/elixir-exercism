@@ -24,7 +24,7 @@ defmodule RomanNumerals do
     compose(number, 0, "")
   end
 
-  defp compose(number = 0, _basei, roman), do: roman
+  defp compose(_number = 0, _basei, roman), do: roman
 
   defp compose(number, basei, roman) do
     base = Enum.at(@base, basei)
@@ -33,7 +33,7 @@ defmodule RomanNumerals do
     compose(resto, basei+1, romanp(multi, base, roman))
   end
 
-  defp romanp(multi = 0, _base, roman), do: roman
+  defp romanp(_multi = 0, _base, roman), do: roman
 
   defp romanp(multi, base, roman) do
     "#{roman}#{String.duplicate(@dic[base], multi)}"
