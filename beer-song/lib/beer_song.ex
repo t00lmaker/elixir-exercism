@@ -1,13 +1,13 @@
 defmodule BeerSong do
-  import String 
-
+  import Enum, only: [map: 2, join: 2]
+  
   @doc """
   Get a single verse of the beer song
   """
   @spec verse(integer) :: String.t()
   def verse(number) do
     """
-    #{ bottle(number) |> capitalize  } of beer on the wall, #{ bottle(number) } of beer.
+    #{ bottle(number) |> String.capitalize } of beer on the wall, #{ bottle(number) } of beer.
     #{ action(number) }, #{ bottle(number - 1) } of beer on the wall.
     """
   end  
@@ -17,7 +17,9 @@ defmodule BeerSong do
   """
   @spec lyrics(Range.t()) :: String.t()
   def lyrics(range) do
-    Enum.reduce(range, "", &(&2 <> verse(&1) <> "\n")) |> slice(0..-2)
+    range
+    |> map(&(verse(&1)))
+    |> join("\n")
   end
   def lyrics(), do: lyrics(99..0)
   
