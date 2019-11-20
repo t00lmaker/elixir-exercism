@@ -18,7 +18,7 @@ defmodule BeerSong do
   @spec lyrics(Range.t()) :: String.t()
   def lyrics(range) do
     range
-    |> map(&(verse(&1)))
+    |> map(&verse/1)
     |> join("\n")
   end
   def lyrics(), do: lyrics(99..0)
